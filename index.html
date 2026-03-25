@@ -1,10 +1,5 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CV Saya</title>
-</head>
-
 <body>
 
 <h1 id="nama">Loading...</h1>
@@ -20,7 +15,7 @@ fetch("https://script.google.com/macros/s/AKfycbxFm2pLqNfFlaAjK-cyh7yJgYGZq2OPcm
   document.getElementById("kontak").innerText = data.kontak;
 })
 .catch(err => {
-  document.body.innerHTML = "Error: " + err;
+  document.body.innerHTML = "ERROR: " + err;
 });
 </script>
 
