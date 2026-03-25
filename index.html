@@ -12,7 +12,7 @@
 <p id="kontak"></p>
 
 <script>
-fetch("https://script.google.com/macros/s/AKfycbxFm2pLqNfFlaAjK-cyh7yJgYGZq2OPcmXE7TVNrWaIB6-WrjP6CgwwvufX2dL_UMv_Gw/exec")
+fetch("https://script.google.com/macros/s/AKfycbxFm2pLqNfFlaAjK-cyh7yJgYGZq2OPcmXE7TVNrWaIB6-WrjP6CgwwvufX2dL_UMv_Gw/exec?api=true")
 .then(res => res.json())
 .then(data => {
   document.getElementById("nama").innerText = data.nama;
