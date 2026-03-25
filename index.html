@@ -2,20 +2,13 @@
 <html>
 <body>
 
-<h1 id="nama">Loading...</h1>
-<p id="pekerjaan"></p>
-<p id="kontak"></p>
+<div id="app">Loading...</div>
 
 <script>
-fetch("https://script.google.com/macros/s/AKfycbxFm2pLqNfFlaAjK-cyh7yJgYGZq2OPcmXE7TVNrWaIB6-WrjP6CgwwvufX2dL_UMv_Gw/exec?api=true")
-.then(res => res.json())
-.then(data => {
-  document.getElementById("nama").innerText = data.nama;
-  document.getElementById("pekerjaan").innerText = data.pekerjaan;
-  document.getElementById("kontak").innerText = data.kontak;
-})
-.catch(err => {
-  document.body.innerHTML = "ERROR: " + err;
+fetch("https://script.google.com/macros/s/AKfycbxFm2pLqNfFlaAjK-cyh7yJgYGZq2OPcmXE7TVNrWaIB6-WrjP6CgwwvufX2dL_UMv_Gw/exec")
+.then(res => res.text())
+.then(html => {
+  document.getElementById("app").innerHTML = html;
 });
 </script>
 
