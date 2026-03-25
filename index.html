@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CV Saya</title>
+</head>
+
+<body>
+
+<h1 id="nama">Loading...</h1>
+<p id="pekerjaan"></p>
+<p id="kontak"></p>
+
+<script>
+fetch("https://script.google.com/macros/s/AKfycbxFm2pLqNfFlaAjK-cyh7yJgYGZq2OPcmXE7TVNrWaIB6-WrjP6CgwwvufX2dL_UMv_Gw/exec")
+.then(res => res.json())
+.then(data => {
+  document.getElementById("nama").innerText = data.nama;
+  document.getElementById("pekerjaan").innerText = data.pekerjaan;
+  document.getElementById("kontak").innerText = data.kontak;
+})
+.catch(err => {
+  document.body.innerHTML = "Error: " + err;
+});
+</script>
+
+</body>
+</html>
