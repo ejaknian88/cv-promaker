@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/order-cv",
+      "destination": "https://script.google.com/macros/s/AKfycbXXXXXXXXXXXX/exec",
+      "permanent": false
+    }
+  ]
+}
