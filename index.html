@@ -1,133 +1,561 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CV ProMaker</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV ProMaker - Jasa Pembuatan CV Profesional</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
+    <!-- SEO & PREVIEW WHATSAPP (OPEN GRAPH) -->
+    <meta name="description" content="Jasa pembuatan CV Profesional, ATS Friendly, dan Kreatif. Tingkatkan peluang diterima kerja dengan desain CV memukau dari ProMaker!">
+    <meta property="og:title" content="CV ProMaker - Jasa Desain CV Profesional">
+    <meta property="og:description" content="Buat HRD terkesan dengan CV Anda! Pilih dari puluhan template premium kami. Proses cepat, hasil memuaskan.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=1200&h=630&fit=crop">
+    <meta property="og:type" content="website">
 
-    body {
-      background: #eef3f9;
-      color: #111827;
-    }
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Konfigurasi Tailwind & Font -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { primary: '#3b82f6', secondary: '#1e40af' },
+                    fontFamily: { sans: ['Poppins', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- SweetAlert2 untuk Popup -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    a {
-      text-decoration: none;
-    }
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .template-card:hover .overlay { opacity: 1; }
+        
+        /* Modal animasi */
+        .modal-enter { opacity: 0; transform: scale(0.95); transition: all 0.3s ease-out; }
+        .modal-enter-active { opacity: 1; transform: scale(1); }
+        .modal-exit { opacity: 1; transform: scale(1); transition: all 0.2s ease-in; }
+        .modal-exit-active { opacity: 0; transform: scale(0.95); }
 
-    /* NAVBAR */
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 40px;
-      background: #fff;
-      border-bottom: 1px solid #e5e7eb;
-    }
-
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    .logo span {
-      color: #3b82f6;
-    }
-
-    .nav-menu {
-      display: flex;
-      gap: 30px;
-      font-weight: 500;
-      color: #4b5563;
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .btn {
-      background: #3b82f6;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 25px;
-      font-weight: bold;
-    }
-
-    /* HERO */
-    .hero {
-      text-align: center;
-      padding: 100px 20px;
-    }
-
-    .hero h1 {
-      font-size: 48px;
-      font-weight: 800;
-      margin-bottom: 20px;
-    }
-
-    .hero h1 span {
-      color: #3b82f6;
-      display: block;
-    }
-
-    .hero p {
-      font-size: 18px;
-      color: #4b5563;
-      max-width: 700px;
-      margin: auto;
-      line-height: 1.6;
-    }
-
-    @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 32px;
-      }
-
-      .nav-menu {
-        display: none;
-      }
-    }
-  </style>
+        /* Custom Scrollbar untuk Zoom Area */
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
 </head>
+<body class="bg-gray-50 text-gray-800 antialiased flex flex-col min-h-screen">
 
-<body>
+    <!-- Navbar -->
+    <nav class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <div class="bg-primary text-white p-2 rounded-lg"><i class="fas fa-file-alt text-xl"></i></div>
+                    <span class="font-bold text-2xl text-gray-800 tracking-tight">CV <span class="text-primary">ProMaker</span></span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#" class="text-gray-600 hover:text-primary font-medium transition">Beranda</a>
+                    <a href="#katalog" class="text-gray-600 hover:text-primary font-medium transition">Katalog CV</a>
+                    <a href="#testimoni" class="text-gray-600 hover:text-primary font-medium transition">Testimoni</a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <!-- 🚨 GANTI LINK INSTAGRAM DI SINI (NAVBAR ATAS) -->
+                    <a href="https://www.instagram.com/lokerpalembangterkini.backup" target="_blank" class="text-gray-500 hover:text-pink-600 text-xl transition"><i class="fab fa-instagram"></i></a>
+                    
+                    <a href="#katalog" class="bg-primary hover:bg-secondary text-white px-6 py-2.5 rounded-full font-medium shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5">Pesan Sekarang</a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-  <!-- NAVBAR -->
-  <div class="navbar">
-    <div class="logo">CV <span>ProMaker</span></div>
-
-    <div class="nav-menu">
-      <a href="#">Beranda</a>
-      <a href="#">Katalog CV</a>
-      <a href="#">Testimoni</a>
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-br from-blue-50 to-white pt-16 pb-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 leading-tight">
+                Buat HRD Terkesan dengan <br class="hidden md:block"><span class="text-primary">CV Profesional Anda</span>
+            </h1>
+            <p class="text-lg text-gray-600 mb-10 max-w-2xl mx-auto">
+                Tingkatkan peluang panggilan interview hingga 80%. Pilih desain impianmu, isi data, dan biarkan tim ahli kami yang merapikannya.
+            </p>
+        </div>
     </div>
 
-    <div class="nav-right">
-      <a href="/order-cv" class="btn">Pesan Sekarang</a>
+    <!-- Main Katalog Section -->
+    <main id="katalog" class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Katalog Template CV</h2>
+            <div class="w-24 h-1 bg-primary mx-auto rounded-full"></div>
+        </div>
+
+        <!-- Filter Kategori -->
+        <div class="flex flex-wrap justify-center gap-3 mb-12" id="filter-container">
+            <button onclick="filterCV('Semua')" class="filter-btn active bg-primary text-white px-5 py-2 rounded-full font-medium shadow-sm transition-all hover:shadow-md">Semua</button>
+            <button onclick="filterCV('Umum')" class="filter-btn bg-white text-gray-600 border border-gray-200 px-5 py-2 rounded-full font-medium hover:bg-gray-50 transition-all hover:shadow-md">Umum</button>
+            <button onclick="filterCV('Kreatif')" class="filter-btn bg-white text-gray-600 border border-gray-200 px-5 py-2 rounded-full font-medium hover:bg-gray-50 transition-all hover:shadow-md">Kreatif</button>
+            <button onclick="filterCV('ATS Friendly')" class="filter-btn bg-white text-gray-600 border border-gray-200 px-5 py-2 rounded-full font-medium hover:bg-gray-50 transition-all hover:shadow-md">ATS Friendly</button>
+            <button onclick="filterCV('IT/Tech')" class="filter-btn bg-white text-gray-600 border border-gray-200 px-5 py-2 rounded-full font-medium hover:bg-gray-50 transition-all hover:shadow-md">IT/Tech</button>
+            <button onclick="filterCV('Manajemen')" class="filter-btn bg-white text-gray-600 border border-gray-200 px-5 py-2 rounded-full font-medium hover:bg-gray-50 transition-all hover:shadow-md">Manajemen</button>
+        </div>
+
+        <!-- Grid Katalog -->
+        <div id="cv-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <!-- Item akan di-render oleh JavaScript di sini -->
+        </div>
+
+        <!-- Tombol Lihat Lebih Banyak -->
+        <div id="load-more-container" class="text-center mt-12 hidden">
+            <button onclick="loadMoreCV()" class="bg-white border-2 border-primary text-primary hover:bg-primary hover:text-white font-bold py-3 px-8 rounded-full transition-all shadow-sm hover:shadow-md inline-flex items-center justify-center gap-2">
+                Lihat Lebih Banyak <i class="fas fa-chevron-down"></i>
+            </button>
+        </div>
+    </main>
+
+    <!-- Section Testimoni Pelanggan -->
+    <section id="testimoni" class="py-20 px-4 bg-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">Apa Kata Mereka?</h2>
+                <div class="w-24 h-1.5 bg-primary mx-auto rounded-full mb-6"></div>
+                <p class="text-lg text-gray-500 max-w-2xl mx-auto">Lebih dari 500+ pelamar kerja telah berhasil meraih karir impian mereka bersama CV ProMaker.</p>
+            </div>
+
+            <!-- Grid Testimoni -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- TESTIMONI 1 -->
+                <div class="bg-gray-50 border border-gray-100 p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 relative group">
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop" alt="Foto Klien" class="w-16 h-16 rounded-full object-cover border-2 border-primary p-0.5">
+                        <div>
+                            <h4 class="font-bold text-gray-800 text-lg">Siti Rahmawati</h4>
+                            <p class="text-sm font-medium text-primary">Diterima di Bank BUMN</p>
+                        </div>
+                    </div>
+                    <div class="flex text-yellow-400 mb-4 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="text-gray-600 leading-relaxed italic">"Seneng banget! Sempat pesimis karena udah lama apply nggak dipanggil. Pas ganti desain CV di sini, minggu depannya langsung dapat panggilan interview!"</p>
+                </div>
+
+                <!-- TESTIMONI 2 (BIRU) -->
+                <div class="bg-blue-600 p-8 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 transform md:-translate-y-4 relative group">
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop" alt="Foto Klien" class="w-16 h-16 rounded-full object-cover border-2 border-white p-0.5">
+                        <div>
+                            <h4 class="font-bold text-white text-lg">Dimas Anggara</h4>
+                            <p class="text-sm font-medium text-blue-200">Software Engineer Startup</p>
+                        </div>
+                    </div>
+                    <div class="flex text-yellow-300 mb-4 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="text-blue-50 leading-relaxed italic">"Adminnya gercep banget, revisi nggak sampai sejam udah beres. Buat kalian yang mau melamar ke startup IT, sangat recommended pakai jasa ini. 10/10!"</p>
+                </div>
+
+                <!-- TESTIMONI 3 -->
+                <div class="bg-gray-50 border border-gray-100 p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 relative group">
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop" alt="Foto Klien" class="w-16 h-16 rounded-full object-cover border-2 border-primary p-0.5">
+                        <div>
+                            <h4 class="font-bold text-gray-800 text-lg">Nadia Putri</h4>
+                            <p class="text-sm font-medium text-primary">HRD & General Affair</p>
+                        </div>
+                    </div>
+                    <div class="flex text-yellow-400 mb-4 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
+                    <p class="text-gray-600 leading-relaxed italic">"Sebagai orang HR, saya tahu CV yang bagus itu seperti apa. Iseng nyoba pesen di sini ternyata hasilnya di luar ekspektasi! Layoutnya clean, informasi tersampaikan jelas."</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="text-2xl font-bold tracking-wider mb-4">CV <span class="text-primary">ProMaker</span></div>
+            <p class="text-gray-400 mb-6">Solusi pembuatan CV profesional terpercaya di Indonesia.</p>
+            <div class="flex justify-center space-x-6 mb-8">
+                <!-- 🚨 GANTI LINK SOSIAL MEDIA DI SINI (FOOTER BAWAH) -->
+                <a href="https://www.instagram.com/lokerpalembangterkini.backup" target="_blank" class="text-gray-400 hover:text-white text-2xl transition"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/6282258812048" target="_blank" class="text-gray-400 hover:text-white text-2xl transition"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.tiktok.com/@username_anda" target="_blank" class="text-gray-400 hover:text-white text-2xl transition"><i class="fab fa-tiktok"></i></a>
+            </div>
+            <p class="text-gray-500 text-sm">&copy; 2026 CV ProMaker. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Modal Preview Gambar dengan Fitur ZOOM -->
+    <div id="preview-modal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="preview-title" role="dialog" aria-modal="true">
+        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div id="preview-backdrop" class="fixed inset-0 bg-gray-900 bg-opacity-90 transition-opacity opacity-0" aria-hidden="true" onclick="closePreview()"></div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            
+            <div id="preview-panel" class="inline-block align-bottom bg-transparent text-left overflow-hidden transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl w-full opacity-0 scale-95">
+                <div class="relative flex flex-col items-center">
+                    <button onclick="closePreview()" class="absolute -top-10 right-0 text-white hover:text-red-500 transition focus:outline-none z-10">
+                        <i class="fas fa-times text-3xl"></i>
+                    </button>
+                    
+                    <div class="w-full max-h-[75vh] overflow-auto rounded-lg shadow-2xl bg-gray-100 relative custom-scrollbar scroll-smooth">
+                        <img id="preview-image" src="" alt="Preview CV" class="w-full h-auto object-contain cursor-zoom-in transition-all duration-300 origin-top" onclick="toggleZoom(this)">
+                        
+                        <div id="zoom-hint" class="absolute top-3 right-3 bg-black/60 text-white text-xs px-3 py-1.5 rounded-full pointer-events-none transition-opacity duration-300 backdrop-blur-sm">
+                            <i class="fas fa-search-plus"></i> Klik untuk Zoom
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white w-full rounded-xl mt-4 p-5 flex flex-col sm:flex-row justify-between items-center shadow-xl gap-4">
+                        <div>
+                            <h3 id="preview-title" class="text-2xl font-bold text-gray-800"></h3>
+                            <p id="preview-price" class="text-xl font-semibold text-primary mt-1"></p>
+                        </div>
+                        <button id="preview-order-btn" class="w-full sm:w-auto bg-primary hover:bg-secondary text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                            Pesan Sekarang <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <!-- HERO -->
-  <div class="hero">
-    <h1>
-      Buat HRD Terkesan dengan
-      <span>CV Profesional Anda</span>
-    </h1>
+    <!-- Modal Form Pemesanan (Akan dipanggil saat klik Pesan) -->
+    <div id="orderModal" class="fixed inset-0 z-[60] hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" onclick="closeModal()"></div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div class="inline-block align-bottom bg-white rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg w-full">
+                
+                <div class="bg-primary px-6 py-4 flex justify-between items-center">
+                    <h3 class="text-xl leading-6 font-bold text-white flex items-center gap-2" id="modal-title">
+                        <i class="fas fa-shopping-cart"></i> Form Pemesanan
+                    </h3>
+                    <button onclick="closeModal()" class="text-white hover:text-gray-200 focus:outline-none">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
 
-    <p>
-      Tingkatkan peluang panggilan interview hingga 80%. Pilih desain impianmu,
-      isi data, dan biarkan tim ahli kami yang merapikannya.
-    </p>
-  </div>
+                <form id="orderForm" class="px-6 py-6" onsubmit="submitOrder(event)">
+                    <div class="mb-5 bg-blue-50 p-4 rounded-xl border border-blue-100 flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-500 mb-1">Template Pilihan:</p>
+                            <h4 id="display-template-name" class="font-bold text-gray-800 text-lg"></h4>
+                            <input type="hidden" id="template-name" name="templateName">
+                        </div>
+                        <div class="text-right">
+                            <p class="text-sm text-gray-500 mb-1">Harga:</p>
+                            <p id="display-template-price" class="font-bold text-primary text-lg"></p>
+                        </div>
+                    </div>
 
+                    <div class="space-y-4">
+                        <div>
+                            <label for="customer-name" class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap *</label>
+                            <input type="text" id="customer-name" required class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition outline-none" placeholder="Masukkan nama Anda">
+                        </div>
+                        <div>
+                            <label for="customer-wa" class="block text-sm font-medium text-gray-700 mb-1">Nomor WhatsApp *</label>
+                            <input type="tel" id="customer-wa" required class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition outline-none" placeholder="Contoh: 081234567890">
+                        </div>
+                        <div>
+                            <label for="customer-notes" class="block text-sm font-medium text-gray-700 mb-1">Catatan Tambahan (Opsional)</label>
+                            <textarea id="customer-notes" rows="2" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition outline-none" placeholder="Misal: Warna diganti biru, dsb."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="mt-8">
+                        <button type="submit" id="btn-submit" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3.5 px-4 rounded-xl shadow-md transition flex justify-center items-center gap-2 text-lg">
+                            <i class="fab fa-whatsapp text-xl"></i> Kirim Pesanan
+                        </button>
+                    </div>
+                    <p class="text-xs text-center text-gray-500 mt-4 flex items-center justify-center gap-1">
+                        <i class="fas fa-lock text-gray-400"></i> Data Anda dijamin aman.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logic JavaScript Utama -->
+    <script>
+        // ==========================================
+        // 🚨 1. DATA KATALOG TEMPLATE CV ANDA
+        // ==========================================
+        const cvTemplates = [
+            { id: 'CV-001', name: 'Minimalis Elegan', price: 'Rp 45.000', category: 'Umum', image: 'https://i.postimg.cc/7h2N50Nb/Green-professional-modern-CV-resume-(1).jpg' },
+            { id: 'CV-002', name: 'Creative Studio', price: 'Rp 60.000', category: 'Kreatif', image: 'https://i.postimg.cc/gJDfj9Nz/Salinan-dari-CV-Resume-Pekerjaan-Manajer-Sosial-Media-Modern-Krem-Putih-dan-Hitam-(1).jpg' },
+            { id: 'CV-003', name: 'Corporate Pro', price: 'Rp 50.000', category: 'Manajemen', image: 'https://i.postimg.cc/9fGfxMFt/White-And-Grey-Modern-CV-Resume-(2).png' },
+            { id: 'CV-004', name: 'Tech Developer', price: 'Rp 55.000', category: 'IT/Tech', image: 'https://i.postimg.cc/nhNsRgKn/Brown-Cream-Professional-Web-Developer-Resume-(1).png' },
+            { id: 'CV-005', name: 'Akademisi ATS', price: 'Rp 40.000', category: 'ATS Friendly', image: 'https://i.postimg.cc/wxb9QJQN/Neutral-Simple-Professional-ATS-Friendly-Resume-(1).png' },
+            { id: 'CV-006', name: 'Modern Startup', price: 'Rp 65.000', category: 'Modern', image: 'https://i.postimg.cc/2SmD5csD/Modern-Minimalist-CV-Resume-(1).png' },
+            { id: 'CV-007', name: 'Modern Profesional', price: 'Rp 50.000', category: 'Modern', image: 'https://i.postimg.cc/tJjzV7vw/CV-Resume-Model-Profesional-Cokelat-Putih-(1).jpg' },
+            { id: 'CV-008', name: 'Professional Healthcare', price: 'Rp 65.000', category: 'Medis', image: 'https://i.postimg.cc/HkgRwsRQ/Biru-dan-Putih-Resume-Apoteker-Profesional-(1).jpg' },
+            { id: 'CV-009', name: 'Creative Minimalist', price: 'Rp 50.000', category: 'Modern', image: 'https://i.postimg.cc/3JmJrN2J/Blue-And-White-Modern-Resume-Poster-(A3-Portrait)-(1).png' },
+            { id: 'CV-010', name: 'Modern Startup', price: 'Rp 65.000', category: 'Modern', image: 'https://i.postimg.cc/7Y3Fj1fV/Navy-Yellow-Modern-Professional-Designer-CV-Resume-(1).png' }
+        ];
+
+        // ==========================================
+        // 2. FUNGSI RENDER GRID KATALOG (DENGAN LOAD MORE)
+        // ==========================================
+        let currentLimit = 8; // Tampilkan 8 CV di awal
+        let currentCategory = 'Semua';
+
+        function renderKatalog(category = 'Semua', resetLimit = true) {
+            // Jika pindah kategori, reset batasan tampilan kembali ke 8
+            if (resetLimit) {
+                currentLimit = 8; 
+                currentCategory = category;
+            }
+
+            const grid = document.getElementById('cv-grid');
+            grid.innerHTML = ''; 
+
+            // Filter data sesuai kategori
+            const filteredData = category === 'Semua' 
+                ? cvTemplates 
+                : cvTemplates.filter(cv => cv.category === category);
+
+            // Potong data sesuai limit (menampilkan maksimal sesuai currentLimit)
+            const dataToRender = filteredData.slice(0, currentLimit);
+
+            dataToRender.forEach(cv => {
+                const card = `
+                    <div class="template-card group bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full transform hover:-translate-y-1">
+                        <div class="relative overflow-hidden cursor-pointer" onclick="openPreview('${cv.id}', '${cv.name}', '${cv.price}', '${cv.image}')">
+                            <img src="${cv.image}" alt="${cv.name}" class="w-full h-[320px] object-cover object-top transition duration-500 group-hover:scale-105">
+                            <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-xs font-bold px-3 py-1 rounded-full text-gray-700 shadow-sm">
+                                ${cv.category}
+                            </div>
+                            <!-- Overlay Hover -->
+                            <div class="overlay absolute inset-0 bg-gray-900/40 opacity-0 transition-opacity duration-300 flex items-center justify-center">
+                                <span class="bg-white text-gray-800 font-semibold px-5 py-2.5 rounded-full shadow-lg flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                                    <i class="fas fa-search"></i> Lihat Detail
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-5 flex-grow flex flex-col justify-between">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-1">${cv.name}</h3>
+                                <p class="text-sm text-gray-500 mb-4">Kode: ${cv.id}</p>
+                            </div>
+                            <div class="flex items-center justify-between mt-auto pt-4 border-t border-gray-50">
+                                <span class="text-xl font-black text-primary">${cv.price}</span>
+                                <button onclick="openModal('${cv.id}', '${cv.name}', '${cv.price}')" class="bg-primary hover:bg-secondary text-white font-medium py-2 px-5 rounded-lg transition shadow-sm hover:shadow flex items-center gap-2">
+                                    Pesan <i class="fas fa-shopping-cart text-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += card;
+            });
+
+            // Logic untuk menyembunyikan/menampilkan tombol "Lihat Lebih Banyak"
+            const loadMoreBtn = document.getElementById('load-more-container');
+            if (filteredData.length > currentLimit) {
+                loadMoreBtn.classList.remove('hidden');
+            } else {
+                loadMoreBtn.classList.add('hidden');
+            }
+        }
+
+        // Fungsi khusus saat tombol Lihat Lebih Banyak diklik
+        function loadMoreCV() {
+            // Langsung tampilkan SEMUA sisa CV yang ada!
+            currentLimit += 100; 
+            renderKatalog(currentCategory, false); // Render ulang tanpa mereset limit
+        }
+
+        // ==========================================
+        // 3. FUNGSI FILTER KATEGORI
+        // ==========================================
+        function filterCV(category) {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('bg-primary', 'text-white', 'active');
+                btn.classList.add('bg-white', 'text-gray-600');
+            });
+            const activeBtn = Array.from(document.querySelectorAll('.filter-btn')).find(btn => btn.innerText === category);
+            if(activeBtn) {
+                activeBtn.classList.remove('bg-white', 'text-gray-600');
+                activeBtn.classList.add('bg-primary', 'text-white', 'active');
+            }
+            renderKatalog(category, true); // Pastikan pakai 'true' agar mereset tampilan ke 8 CV pertama
+        }
+
+        // ==========================================
+        // 4. LOGIC MODAL PREVIEW & ZOOM
+        // ==========================================
+        const previewModal = document.getElementById('preview-modal');
+        const previewBackdrop = document.getElementById('preview-backdrop');
+        const previewPanel = document.getElementById('preview-panel');
+        let isZoomed = false;
+
+        function toggleZoom(imgElement) {
+            isZoomed = !isZoomed;
+            const hint = document.getElementById('zoom-hint');
+            if (isZoomed) {
+                imgElement.style.width = '200%';
+                imgElement.style.maxWidth = 'none';
+                imgElement.classList.remove('cursor-zoom-in');
+                imgElement.classList.add('cursor-zoom-out');
+                if(hint) hint.classList.add('opacity-0');
+            } else {
+                imgElement.style.width = '100%';
+                imgElement.style.maxWidth = '100%';
+                imgElement.classList.remove('cursor-zoom-out');
+                imgElement.classList.add('cursor-zoom-in');
+                if(hint) hint.classList.remove('opacity-0');
+            }
+        }
+
+        function openPreview(id, name, price, imageSrc) {
+            document.getElementById('preview-image').src = imageSrc;
+            document.getElementById('preview-title').innerText = `${id} - ${name}`;
+            document.getElementById('preview-price').innerText = price;
+            
+            document.getElementById('preview-order-btn').onclick = function() {
+                closePreview();
+                setTimeout(() => openModal(id, name, price), 300);
+            };
+
+            previewModal.classList.remove('hidden');
+            setTimeout(() => {
+                previewBackdrop.classList.remove('opacity-0');
+                previewBackdrop.classList.add('opacity-100');
+                previewPanel.classList.remove('opacity-0', 'scale-95');
+                previewPanel.classList.add('opacity-100', 'scale-100');
+            }, 10);
+        }
+
+        function closePreview() {
+            previewBackdrop.classList.remove('opacity-100');
+            previewBackdrop.classList.add('opacity-0');
+            previewPanel.classList.remove('opacity-100', 'scale-100');
+            previewPanel.classList.add('opacity-0', 'scale-95');
+            
+            setTimeout(() => {
+                previewModal.classList.add('hidden');
+                document.getElementById('preview-image').src = ''; 
+                isZoomed = false;
+                const img = document.getElementById('preview-image');
+                img.style.width = '100%';
+                img.style.maxWidth = '100%';
+                img.classList.remove('cursor-zoom-out');
+                img.classList.add('cursor-zoom-in');
+                const hint = document.getElementById('zoom-hint');
+                if(hint) hint.classList.remove('opacity-0');
+            }, 300);
+        }
+
+        // ==========================================
+        // 5. LOGIC MODAL FORM PEMESANAN
+        // ==========================================
+        const modal = document.getElementById('orderModal');
+        const modalContent = modal.querySelector('.inline-block');
+
+        function openModal(id, name, price) {
+            const fullName = `${id} - ${name}`;
+            document.getElementById('template-name').value = fullName;
+            document.getElementById('display-template-name').innerText = fullName;
+            document.getElementById('display-template-price').innerText = price;
+            
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.querySelector('.bg-gray-500').classList.add('opacity-100');
+                modalContent.classList.remove('opacity-0', 'translate-y-4', 'sm:translate-y-0', 'sm:scale-95');
+                modalContent.classList.add('opacity-100', 'translate-y-0', 'sm:scale-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            modal.querySelector('.bg-gray-500').classList.remove('opacity-100');
+            modalContent.classList.remove('opacity-100', 'translate-y-0', 'sm:scale-100');
+            modalContent.classList.add('opacity-0', 'translate-y-4', 'sm:translate-y-0', 'sm:scale-95');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.getElementById('orderForm').reset();
+            }, 300);
+        }
+
+        // ==========================================
+        // 🚨 6. FUNGSI KIRIM DATA KE GOOGLE SHEETS
+        // ==========================================
+        async function submitOrder(e) {
+            e.preventDefault();
+
+            // 🚨 GANTI DENGAN LINK WEB APP GAS ANDA!
+            const gasWebAppUrl = 'https://script.google.com/macros/s/AKfycbxFm2pLqNfFlaAjk-cyh7yJgYGZq2OPcmXE7TVNrWaIB6-WrjP6CgwwvufX2dL_jCjT/exec';
+            
+            // 🚨 GANTI DENGAN NOMOR WA ANDA (Pakai 62)
+            const adminWaNumber = '6282258812048'; 
+
+            const templateName = document.getElementById('template-name').value;
+            const nama = document.getElementById('customer-name').value;
+            const wa = document.getElementById('customer-wa').value;
+            const notes = document.getElementById('customer-notes').value;
+            const btnSubmit = document.getElementById('btn-submit');
+
+            // Ubah tombol jadi loading
+            const originalBtnHtml = btnSubmit.innerHTML;
+            btnSubmit.innerHTML = '<i class="fas fa-spinner fa-spin text-xl"></i> Memproses...';
+            btnSubmit.disabled = true;
+            btnSubmit.classList.replace('bg-green-500', 'bg-gray-400');
+
+            try {
+                // Kirim data ke Google Apps Script (Sembunyi-sembunyi di background)
+                const response = await fetch(gasWebAppUrl, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    cache: 'no-cache',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        customerName: nama,
+                        customerWa: wa,
+                        templateName: templateName,
+                        customerNotes: notes
+                    })
+                });
+
+                // Jika berhasil, munculkan Popup Sukses (SweetAlert2)
+                closeModal();
+                
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Pesanan Diterima!',
+                    html: `Terima kasih <b>${nama}</b>, pesanan template <b>${templateName}</b> telah kami catat di database.<br><br>Kami akan mengarahkan Anda ke WhatsApp Admin untuk proses selanjutnya.`,
+                    confirmButtonText: 'Lanjut ke WhatsApp <i class="fab fa-whatsapp"></i>',
+                    confirmButtonColor: '#10b981',
+                    allowOutsideClick: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Buka WhatsApp Otomatis
+                        const waMessage = `Halo Admin CV ProMaker,%0A%0ASaya ingin memesan pembuatan CV.%0A%0A*Nama:* ${nama}%0A*No HP:* ${wa}%0A*Pilihan Template:* ${templateName}%0A*Catatan:* ${notes ? notes : '-'}`;
+                        window.open(`https://wa.me/${adminWaNumber}?text=${waMessage}`, '_blank');
+                    }
+                });
+
+            } catch (error) {
+                // Jika Error (Misal tidak ada internet)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Waduh, Gagal Kirim!',
+                    text: 'Pastikan koneksi internet Anda lancar dan coba lagi.',
+                    confirmButtonColor: '#ef4444'
+                });
+            } finally {
+                // Kembalikan tombol seperti semula
+                btnSubmit.innerHTML = originalBtnHtml;
+                btnSubmit.disabled = false;
+                btnSubmit.classList.replace('bg-gray-400', 'bg-green-500');
+            }
+        }
+
+        // Render Katalog Pertama Kali saat Web Dibuka
+        window.onload = () => {
+            renderKatalog();
+        };
+    </script>
 </body>
 </html>
