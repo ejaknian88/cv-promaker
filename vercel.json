@@ -2,7 +2,7 @@
   "redirects": [
     {
       "source": "/order-cv",
-      "destination": "https://script.google.com/macros/s/AKfycbXXXXXXXXXXXX/exec",
+      "destination": "https://script.google.com/macros/s/AKfycbxFm2pLqNfFlaAjK-cyh7yJgYGZq2OPcmXE7TVNrWaIB6-WrjP6CgwwvufX2dL_UMv_Gw/exec",
       "permanent": false
     }
   ]
