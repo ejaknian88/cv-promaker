@@ -2,32 +2,277 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CV ProMaker</title>
-
+  <meta name="description" content="Buat HRD terkesan dengan CV profesional Anda." />
   <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 40px;
+      background: #eef3f9;
+      color: #111827;
     }
-    .btn {
-      display: inline-block;
-      padding: 12px 20px;
-      background: #2196f3;
-      color: white;
+
+    a {
       text-decoration: none;
-      border-radius: 6px;
-      margin-top: 20px;
+      color: inherit;
+    }
+
+    .navbar {
+      width: 100%;
+      background: #ffffff;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 22px 34px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 220px;
+    }
+
+    .brand-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      background: #3b82f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 24px;
+      font-weight: bold;
+      box-shadow: 0 6px 18px rgba(59, 130, 246, 0.18);
+    }
+
+    .brand-text {
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .brand-text .blue {
+      color: #3b82f6;
+    }
+
+    .nav-center {
+      display: flex;
+      align-items: center;
+      gap: 54px;
+      justify-content: center;
+      flex: 1;
+    }
+
+    .nav-center a {
+      font-size: 23px;
+      font-weight: 600;
+      color: #4b5563;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      min-width: 280px;
+      justify-content: flex-end;
+    }
+
+    .instagram {
+      font-size: 34px;
+      color: #6b7280;
+      line-height: 1;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #3b82f6;
+      color: #ffffff;
+      font-size: 22px;
+      font-weight: 700;
+      padding: 22px 36px;
+      border-radius: 999px;
+      box-shadow: 0 8px 18px rgba(59, 130, 246, 0.25);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(59, 130, 246, 0.3);
+    }
+
+    .hero {
+      min-height: calc(100vh - 96px);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      text-align: center;
+      padding: 90px 20px 80px;
+    }
+
+    .hero-content {
+      max-width: 1080px;
+    }
+
+    .hero-title {
+      font-size: 74px;
+      line-height: 1.06;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      margin-bottom: 30px;
+      color: #0f172a;
+    }
+
+    .hero-title .blue {
+      color: #3b82f6;
+      display: block;
+    }
+
+    .hero-subtitle {
+      max-width: 980px;
+      margin: 0 auto;
+      font-size: 30px;
+      line-height: 1.5;
+      color: #475569;
+      font-weight: 500;
+    }
+
+    @media (max-width: 1200px) {
+      .brand-text {
+        font-size: 24px;
+      }
+
+      .nav-center {
+        gap: 28px;
+      }
+
+      .nav-center a {
+        font-size: 18px;
+      }
+
+      .cta-btn {
+        font-size: 18px;
+        padding: 18px 28px;
+      }
+
+      .hero-title {
+        font-size: 56px;
+      }
+
+      .hero-subtitle {
+        font-size: 24px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .navbar {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 20px;
+      }
+
+      .brand,
+      .nav-right {
+        min-width: unset;
+        justify-content: center;
+      }
+
+      .nav-center {
+        flex-wrap: wrap;
+        gap: 18px;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 70px 20px;
+      }
+
+      .hero-title {
+        font-size: 42px;
+        letter-spacing: -0.8px;
+      }
+
+      .hero-subtitle {
+        font-size: 20px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .brand-text {
+        font-size: 22px;
+      }
+
+      .brand-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+      }
+
+      .nav-center a {
+        font-size: 16px;
+      }
+
+      .instagram {
+        font-size: 28px;
+      }
+
+      .cta-btn {
+        width: 100%;
+        max-width: 280px;
+        font-size: 18px;
+        padding: 16px 22px;
+      }
+
+      .hero-title {
+        font-size: 34px;
+      }
+
+      .hero-subtitle {
+        font-size: 18px;
+      }
     }
   </style>
 </head>
 <body>
+  <header class="navbar">
+    <div class="brand">
+      <div class="brand-icon">📄</div>
+      <div class="brand-text">CV <span class="blue">ProMaker</span></div>
+    </div>
 
-  <h1>CV ProMaker</h1>
-  <p>Buat HRD terkesan dengan CV profesional Anda</p>
+    <nav class="nav-center">
+      <a href="/">Beranda</a>
+      <a href="#katalog">Katalog CV</a>
+      <a href="#testimoni">Testimoni</a>
+    </nav>
 
-  <a href="/order-cv" class="btn">Pesan Sekarang</a>
+    <div class="nav-right">
+      <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" class="instagram" aria-label="Instagram">◎</a>
+      <a href="/order-cv" class="cta-btn">Pesan Sekarang</a>
+    </div>
+  </header>
 
+  <main class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        Buat HRD Terkesan dengan
+        <span class="blue">CV Profesional Anda</span>
+      </h1>
+      <p class="hero-subtitle">
+        Tingkatkan peluang panggilan interview hingga 80%. Pilih desain impianmu, isi data, dan biarkan tim ahli kami yang merapikannya.
+      </p>
+    </div>
+  </main>
 </body>
 </html>
